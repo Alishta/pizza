@@ -2,6 +2,7 @@ import { useState } from 'react'
 import './App.css'
 import Header from './components/Header/Header'
 import Form from './components/Form/Form'
+import Menu from './components/Menu/Menu'
 
 function App() {
 
@@ -15,6 +16,7 @@ function App() {
         </h1>
         <p className="sub-title">👋 Welcome! Please start by telling us your name:</p>
         <Form></Form>
+        <Menu />
       </main>
     </div>
   )
