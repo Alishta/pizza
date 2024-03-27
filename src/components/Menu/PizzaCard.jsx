@@ -1,17 +1,28 @@
 import React, { useState } from 'react';
-import Counter from "../Counter/Counter";
 
 const PizzaCard = ({card}) => {
 
     const [showCounter, setShowCounter] = useState(false);
-      
+    const [count, setPizzas] = useState(0);
+
     const handleAddToCart = () => {
         setShowCounter(true);
-    };
+    }
 
-    const handleResetCounter = () => {
+    const handleIncrement = () => {
+        setPizzas(count + 1);
+    }
+
+    const handleDecrement = () => {
+        if(count > 0) {
+            setPizzas(count - 1);
+        }
+    }
+
+    const handleDelete = () => {
+        setPizzas(0);
         setShowCounter(false);
-    };
+    }
 
     return (
         <li className="pizza">
@@ -29,7 +40,12 @@ const PizzaCard = ({card}) => {
                                 <button className="button pizza__button" onClick={handleAddToCart}>Add to cart
                                 </button>
                                 ) : (
-                                <Counter onAddToCart={handleResetCounter}/>
+                                <div className="counter">
+                                    <button className="pizza__button" onClick={handleDecrement}>-</button>
+                                    <p>{count}</p>
+                                    <button className="pizza__button" onClick={handleIncrement}>+</button>
+                                    <button className="pizza__button" onClick={handleDelete}>Delete</button>
+                                </div>
                             )}
                         </>
                     }
