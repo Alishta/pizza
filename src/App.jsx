@@ -1,23 +1,28 @@
 import { useState } from 'react'
 import './App.css'
 import Header from './components/Header/Header'
-import Form from './components/Form/Form'
-import Menu from './components/Menu/Menu'
+import Menu from './pages/Menu'
+import { Route, Routes, NavLink } from 'react-router-dom'
+import Auth from './pages/Auth'
+import NotFound from './pages/NotFound'
+import Home from './pages/Home'
 
 function App() {
 
   return (
     <div className='wrapper'>
       <Header text="Pizza Day"></Header>
-      <main className="content">
-        <h1 className="title">The best pizza.
-          <br />
-          <span className="text-yellow">Straight out of the oven, straight to you.</span>
-        </h1>
-        <p className="sub-title">👋 Welcome! Please start by telling us your name:</p>
-        <Form></Form>
-        <Menu />
-      </main>
+      <nav className='nav'>
+        <NavLink to='/' className='nav_link'>Home</NavLink>
+        <NavLink to='/auth' className='nav_link'>Login</NavLink>
+        <NavLink to='/menu' className='nav_link'>Menu</NavLink>
+      </nav>
+      <Routes>
+        <Route path='/' element={<Home />} />
+        <Route path='/auth' element={<Auth />} />
+        <Route path='/menu' element={<Menu />} />
+        <Route path='*' element={<NotFound />} />
+      </Routes>
     </div>
   )
 }
