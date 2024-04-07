@@ -1,13 +1,9 @@
-const Form = ({ children }) => {
-    const handleFormSubmit = (e) => {
-        e.preventDefault()
-    }
-
+const Form = ({ children, onSubmit }) => {
     return (
-        <form className="login-form" onSubmit={handleFormSubmit}>
+        <form className="login-form" onSubmit={onSubmit}>
             {children}
         </form>
-    )
-}
+    );
+};
 
 export default Form;

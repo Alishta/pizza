@@ -1,16 +1,14 @@
-import { useState } from "react";
+import { useState } from 'react';
 
-const Input = ({type, placeholder}) => {
-
-    const [value, setValue] = useState("");
-
-    const handleInputChange = (event) => {
-        setValue(event.target.value);
-    }
-
+const Input = ({ type, placeholder, value, onChange }) => {
     return (
-        <input type={type} placeholder={placeholder} value={value} onChange={handleInputChange} />
-    )
-}
+        <input
+            type={type}
+            placeholder={placeholder}
+            value={value}
+            onChange={onChange}
+        />
+    );
+};
 
 export default Input;
