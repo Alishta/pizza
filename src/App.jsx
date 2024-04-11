@@ -7,6 +7,7 @@ import Auth from './pages/Auth';
 import NotFound from './pages/NotFound';
 import Home from './pages/Home';
 import NewOrder from './pages/NewOrder';
+import Fetch from './pages/Fetch';
 
 function App() {
     return (
@@ -25,12 +26,16 @@ function App() {
                 <NavLink to="/order/new" className="nav_link">
                     New Order
                 </NavLink>
+                <NavLink to="/fetch" className="nav_link">
+                    Fetch
+                </NavLink>
             </nav>
             <Routes>
                 <Route path="/" element={<Home />} />
                 <Route path="/auth" element={<Auth />} />
                 <Route path="/menu" element={<Menu />} />
                 <Route path="/order/new" element={<NewOrder />} />
+                <Route path="/fetch" element={<Fetch />} />
                 <Route path="*" element={<NotFound />} />
             </Routes>
         </div>
