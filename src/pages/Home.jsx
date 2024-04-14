@@ -2,6 +2,7 @@ import Form from '../components/Form/Form';
 import Input from '../components/Input/Input';
 import Button from '../components/Button/Button';
 import React, { useState } from 'react';
+import Counter from '../components/Counter/Counter';
 
 const Home = () => {
     const [value, setValue] = useState('');
@@ -35,6 +36,7 @@ const Home = () => {
                 />
                 <Button text="Login" type="submit" />
             </Form>
+            <Counter />
         </main>
     );
 };

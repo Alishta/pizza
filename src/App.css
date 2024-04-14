@@ -266,3 +266,12 @@ input[type='text'] {
     font-size: 20px;
     font-weight: 700;
 }
+
+/* Counter  */
+.counter__reducer {
+    margin: 30px auto;
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
