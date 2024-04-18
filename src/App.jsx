@@ -1,13 +1,14 @@
-import { useState } from 'react';
+import { Suspense, lazy } from 'react';
 import './App.css';
-import Header from './components/Header/Header';
-import Menu from './pages/Menu';
 import { Route, Routes, NavLink } from 'react-router-dom';
-import Auth from './pages/Auth';
-import NotFound from './pages/NotFound';
-import Home from './pages/Home';
-import NewOrder from './pages/NewOrder';
-import Fetch from './pages/Fetch';
+import Header from './components/Header/Header';
+
+const Menu = lazy(() => import('./pages/Menu'));
+const Auth = lazy(() => import('./pages/Auth'));
+const Home = lazy(() => import('./pages/Home'));
+const NewOrder = lazy(() => import('./pages/NewOrder'));
+const Fetch = lazy(() => import('./pages/Fetch'));
+const NotFound = lazy(() => import('./pages/NotFound'));
 
 function App() {
     return (
@@ -30,14 +31,16 @@ function App() {
                     Fetch
                 </NavLink>
             </nav>
-            <Routes>
-                <Route path="/" element={<Home />} />
-                <Route path="/auth" element={<Auth />} />
-                <Route path="/menu" element={<Menu />} />
-                <Route path="/order/new" element={<NewOrder />} />
-                <Route path="/fetch" element={<Fetch />} />
-                <Route path="*" element={<NotFound />} />
-            </Routes>
+            <Suspense fallback={<h1>Loading...</h1>}>
+                <Routes>
+                    <Route path="/" element={<Home />} />
+                    <Route path="/auth" element={<Auth />} />
+                    <Route path="/menu" element={<Menu />} />
+                    <Route path="/order/new" element={<NewOrder />} />
+                    <Route path="/fetch" element={<Fetch />} />
+                    <Route path="*" element={<NotFound />} />
+                </Routes>
+            </Suspense>
         </div>
     );
 }
