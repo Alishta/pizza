@@ -2,6 +2,7 @@ import React, { useReducer, useState } from 'react';
 
 const Counter = () => {
     const [value, setValue] = useState(0);
+    const [val, setVal] = useState(0);
 
     const reducer = (state, action) => {
         switch (action.type) {
@@ -56,10 +57,17 @@ const Counter = () => {
     return (
         <div className="counter__reducer">
             <h1>Counter: {state.value}</h1>
+            <input
+                type="number"
+                min={0}
+                step={10}
+                value={val}
+                onChange={(e) => setVal(+e.target.value)}
+            />
             <button onClick={handleIncrement}>Increment</button>
             <button onClick={handleDecrement}>Decrement</button>
             <button onClick={handleReset}>Reset</button>
-            <div>
+            <div style={{ backgroundColor: 'red', padding: val }}>
                 <input
                     type="number"
                     placeholder="Value"

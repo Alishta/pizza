@@ -8,7 +8,9 @@ const Auth = lazy(() => import('./pages/Auth'));
 const Home = lazy(() => import('./pages/Home'));
 const NewOrder = lazy(() => import('./pages/NewOrder'));
 const Fetch = lazy(() => import('./pages/Fetch'));
+const Cart = lazy(() => import('./pages/Cart'));
 const NotFound = lazy(() => import('./pages/NotFound'));
+const OrderId = lazy(() => import('./pages/OrderId'));
 
 function App() {
     return (
@@ -27,8 +29,8 @@ function App() {
                 <NavLink to="/order/new" className="nav_link">
                     New Order
                 </NavLink>
-                <NavLink to="/fetch" className="nav_link">
-                    Fetch
+                <NavLink to="/cart" className="nav_link">
+                    Cart
                 </NavLink>
             </nav>
             <Suspense fallback={<h1>Loading...</h1>}>
@@ -37,7 +39,8 @@ function App() {
                     <Route path="/auth" element={<Auth />} />
                     <Route path="/menu" element={<Menu />} />
                     <Route path="/order/new" element={<NewOrder />} />
-                    <Route path="/fetch" element={<Fetch />} />
+                    <Route path="/cart" element={<Cart />} />
+                    <Route path="/order/:id" element={<OrderId />} />
                     <Route path="*" element={<NotFound />} />
                 </Routes>
             </Suspense>

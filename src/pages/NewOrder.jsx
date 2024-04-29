@@ -1,21 +1,34 @@
-import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
-import * as yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
+import * as yup from 'yup';
+import { useSelector, useDispatch } from 'react-redux';
+import { useState, useMemo, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { orderData } from '../redux/slices/pizzaSlice';
 
 const schema = yup.object().shape({
-    name: yup.string().required('field is required'),
-    number: yup
-        .string()
-        .matches(/^\+(?:[0-9] ?){6,14}[0-9]$/, 'phone number is invalid')
-        .required(),
-    address: yup
-        .string()
-        .min(7)
-        .required('address must be at least 7 characters'),
+    customer: yup.string().required('Name is required field'),
+    phone: yup.string().required('Phone number is required field'),
+    address: yup.string().required('Address is required field'),
 });
 
-const NewOrder = () => {
+const OrderPage = () => {
+    const [formError, setFormError] = useState('');
+    const pizzas = useSelector((state) => state.pizza);
+
+    const navigate = useNavigate();
+    const dispatch = useDispatch();
+
+    const cartData = useMemo(() => {
+        return pizzas.items.map((item) => ({
+            pizzaId: item.id,
+            name: item.name,
+            quantity: item.qty,
+            unitPrice: item.unitPrice,
+            totalPrice: item.qty * item.unitPrice,
+        }));
+    }, [pizzas.items]);
+
     const {
         register,
         handleSubmit,
@@ -24,44 +37,94 @@ const NewOrder = () => {
     } = useForm({
         mode: 'onBlur',
         defaultValues: {
-            name: 'Vlad',
-            number: '+1234567890',
+            customer: '',
+            phone: '',
             address: '',
-            priority: false,
         },
         resolver: yupResolver(schema),
     });
 
-    // console.log(formState);
+    const sendOrder = async (data) => {
+        try {
+            const response = await fetch(
+                'https://react-fast-pizza-api.onrender.com/api/order',
+                {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        ...data,
+                        totalPrice: pizzas.totalPrice,
+                        cart: cartData,
+                    }),
+                }
+            );
 
-    const handleFormSubmit = (data) => {
-        console.log(data);
+            const responseData = await response.json();
+
+            if (responseData.status === 'fail') {
+                setFormError(responseData.message);
+            }
+
+            if (responseData.status === 'success') {
+                dispatch(orderData(responseData.data));
+                navigate('/order/' + responseData.data.id);
+            }
+        } catch (error) {
+            setFormError(error.message);
+        }
+    };
+
+    const onSubmit = (data) => {
+        sendOrder(data);
         reset();
     };
 
     return (
-        <div className="order">
-            <h1 className="order__heading">Ready to order? Let`s go!</h1>
-            <form
-                className="order__form"
-                onSubmit={handleSubmit(handleFormSubmit)}
-            >
-                <div className="order__field">
-                    <label htmlFor="name">First name</label>
-                    <input {...register('name')} type="text" id="name" />
-                    {errors.name && <span>{errors.name.message}</span>}
+        <>
+            <h1 className="title">Ready to order? Let`s go!</h1>
+            {formError && (
+                <div className="error-message" style={{ marginBottom: 20 }}>
+                    {formError}
                 </div>
-                <div className="order__field">
-                    <label htmlFor="number">Phone number</label>
-                    <input {...register('number')} type="text" id="number" />
-                    {errors.number && <span>{errors.number.message}</span>}
+            )}
+
+            <form onSubmit={handleSubmit(onSubmit)}>
+                <div className="formItem">
+                    <label htmlFor="customer">Name</label>
+                    <input
+                        {...register('customer')}
+                        type="text"
+                        id="customer"
+                        placeholder="Name"
+                    />
+                    <span className="error">{errors.customer?.message}</span>
                 </div>
-                <div className="order__field">
+
+                <div className="formItem">
+                    <label htmlFor="phone">Phone number</label>
+                    <input
+                        {...register('phone')}
+                        type="text"
+                        id="phone"
+                        placeholder="Phone number"
+                    />
+                    <span className="error">{errors.phone?.message}</span>
+                </div>
+
+                <div className="formItem">
                     <label htmlFor="address">Address</label>
-                    <input {...register('address')} type="text" id="address" />
-                    {errors.address && <span>{errors.address.message}</span>}
+                    <input
+                        {...register('address')}
+                        type="text"
+                        id="address"
+                        placeholder="Address"
+                    />
+                    <span className="error">{errors.address?.message}</span>
                 </div>
-                <div className="order__field checkbox">
+
+                <div className="formItem checkbox">
                     <input
                         {...register('priority')}
                         type="checkbox"
@@ -71,12 +134,13 @@ const NewOrder = () => {
                         Want to yo give your order priority?
                     </label>
                 </div>
-                <button className="order__button" type="submit">
-                    Order now for €39.00
+
+                <button type="submit">
+                    Order now for €{pizzas.totalPrice}
                 </button>
             </form>
-        </div>
+        </>
     );
 };
 
-export default NewOrder;
+export default OrderPage;

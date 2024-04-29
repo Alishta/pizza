@@ -33,9 +33,10 @@ const Menu = (props) => {
             {error && <p>{error}</p>}
             {isLoading && <h2>Loading...</h2>}
             <ul className="menu">
-                {pizzas.map((card) => (
-                    <PizzaCard key={card.id} card={card} />
-                ))}
+                {!!pizzas.length &&
+                    pizzas.map((pizza) => (
+                        <PizzaCard key={pizza.id} pizza={pizza} />
+                    ))}
             </ul>
         </>
     );

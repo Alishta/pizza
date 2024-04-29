@@ -36,7 +36,7 @@ const Home = () => {
                 />
                 <Button text="Login" type="submit" />
             </Form>
-            <Counter />
+            {/* <Counter /> */}
         </main>
     );
 };
