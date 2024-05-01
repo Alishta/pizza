@@ -1,0 +1,1 @@
+import{j as n,L as t}from"./index-Ds8cUp2H.js";const e=()=>n.jsxs("div",{children:[n.jsx("h1",{children:"Page not found"}),n.jsx(t,{to:"/pizza/",children:"Return to main page"})]});export{e as default};
