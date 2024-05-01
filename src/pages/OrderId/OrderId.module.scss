@@ -1,0 +1,26 @@
+.order {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.order__info {
+    font-size: 36px;
+    font-weight: 700;
+}
+.order__item {
+    font-size: 20px;
+}
+.order__cart {
+    font-size: 24px;
+    font-weight: 600;
+}
+
+.cart__item {
+    font-size: 20px;
+}
+
+.total {
+    font-size: 20px;
+    font-weight: 600;
+}

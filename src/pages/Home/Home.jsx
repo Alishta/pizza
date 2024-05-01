@@ -1,8 +1,8 @@
-import Form from '../components/Form/Form';
-import Input from '../components/Input/Input';
-import Button from '../components/Button/Button';
+import Form from '../../components/Form/Form';
+import Input from '../../components/Input/Input';
+import Button from '../../components/Button/Button';
 import React, { useState } from 'react';
-import Counter from '../components/Counter/Counter';
+import Counter from '../../components/Counter/Counter';
 
 const Home = () => {
     const [value, setValue] = useState('');

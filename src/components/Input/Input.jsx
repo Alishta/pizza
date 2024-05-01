@@ -1,4 +1,6 @@
 import { useState } from 'react';
+import styles from './Input.module.scss';
+console.log(styles);
 
 const Input = ({ type, placeholder, value, onChange }) => {
     return (
@@ -7,6 +9,7 @@ const Input = ({ type, placeholder, value, onChange }) => {
             placeholder={placeholder}
             value={value}
             onChange={onChange}
+            className={styles.input}
         />
     );
 };

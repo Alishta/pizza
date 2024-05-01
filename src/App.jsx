@@ -3,14 +3,14 @@ import './App.css';
 import { Route, Routes, NavLink } from 'react-router-dom';
 import Header from './components/Header/Header';
 
-const Menu = lazy(() => import('./pages/Menu'));
-const Auth = lazy(() => import('./pages/Auth'));
-const Home = lazy(() => import('./pages/Home'));
-const NewOrder = lazy(() => import('./pages/NewOrder'));
+const Menu = lazy(() => import('./pages/Menu/Menu'));
+const Auth = lazy(() => import('./pages/Auth/Auth'));
+const Home = lazy(() => import('./pages/Home/Home'));
+const NewOrder = lazy(() => import('./pages/NewOrder/NewOrder'));
 const Fetch = lazy(() => import('./pages/Fetch'));
-const Cart = lazy(() => import('./pages/Cart'));
+const Cart = lazy(() => import('./pages/Cart/Cart'));
 const NotFound = lazy(() => import('./pages/NotFound'));
-const OrderId = lazy(() => import('./pages/OrderId'));
+const OrderId = lazy(() => import('./pages/OrderId/OrderId'));
 
 function App() {
     return (

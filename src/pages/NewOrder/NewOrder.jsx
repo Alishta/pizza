@@ -4,7 +4,8 @@ import * as yup from 'yup';
 import { useSelector, useDispatch } from 'react-redux';
 import { useState, useMemo, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { orderData } from '../redux/slices/pizzaSlice';
+import { orderData } from '../../redux/slices/pizzaSlice';
+import styles from './NewOrder.module.scss';
 
 const schema = yup.object().shape({
     customer: yup.string().required('Name is required field'),
@@ -83,59 +84,65 @@ const OrderPage = () => {
 
     return (
         <>
-            <h1 className="title">Ready to order? Let`s go!</h1>
+            <h1 className={styles.order__title}>Ready to order? Let`s go!</h1>
             {formError && (
                 <div className="error-message" style={{ marginBottom: 20 }}>
                     {formError}
                 </div>
             )}
 
-            <form onSubmit={handleSubmit(onSubmit)}>
-                <div className="formItem">
-                    <label htmlFor="customer">Name</label>
+            <form onSubmit={handleSubmit(onSubmit)} className={styles.form}>
+                <div className={styles.form__item}>
+                    <label htmlFor="customer" className={styles.form__label}>
+                        Name
+                    </label>
                     <input
                         {...register('customer')}
                         type="text"
                         id="customer"
-                        placeholder="Name"
+                        className={styles.form__input}
                     />
                     <span className="error">{errors.customer?.message}</span>
                 </div>
 
-                <div className="formItem">
-                    <label htmlFor="phone">Phone number</label>
+                <div className={styles.form__item}>
+                    <label htmlFor="phone" className={styles.form__label}>
+                        Phone number
+                    </label>
                     <input
                         {...register('phone')}
                         type="text"
                         id="phone"
-                        placeholder="Phone number"
+                        className={styles.form__input}
                     />
                     <span className="error">{errors.phone?.message}</span>
                 </div>
 
-                <div className="formItem">
-                    <label htmlFor="address">Address</label>
+                <div className={styles.form__item}>
+                    <label htmlFor="address" className={styles.form__label}>
+                        Address
+                    </label>
                     <input
                         {...register('address')}
                         type="text"
                         id="address"
-                        placeholder="Address"
+                        className={styles.form__input}
                     />
                     <span className="error">{errors.address?.message}</span>
                 </div>
 
-                <div className="formItem checkbox">
+                <div className={styles.form__item}>
                     <input
                         {...register('priority')}
                         type="checkbox"
                         id="priority"
                     />
-                    <label htmlFor="priority">
+                    <label htmlFor="priority" className={styles.form__label}>
                         Want to yo give your order priority?
                     </label>
                 </div>
 
-                <button type="submit">
+                <button type="submit" className={styles.order__button}>
                     Order now for €{pizzas.totalPrice}
                 </button>
             </form>

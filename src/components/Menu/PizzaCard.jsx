@@ -7,6 +7,7 @@ import {
     removeFromCart,
     // orderData,
 } from '../../redux/slices/pizzaSlice';
+import styles from './PizzaCard.module.scss';
 
 const PizzaCard = ({ pizza }) => {
     const [showCounter, setShowCounter] = useState(false);
@@ -33,41 +34,41 @@ const PizzaCard = ({ pizza }) => {
         setShowCounter(false);
     };
     return (
-        <li className="pizza">
+        <li className={styles.pizza}>
             <img
                 src={pizza.imageUrl}
-                className="pizza__image"
+                className={styles.pizza__image}
                 style={pizza.soldOut ? { filter: 'grayscale(100%)' } : {}}
                 alt={pizza.name}
             ></img>
-            <div className="pizza_info">
-                <p className="pizza__name">{pizza.name}</p>
-                <p className="pizza__ingredients">
+            <div className={styles.pizza_info}>
+                <p className={styles.pizza__name}>{pizza.name}</p>
+                <p className={styles.pizza__ingredients}>
                     {pizza.ingredients.join(', ')}
                 </p>
-                <div className="pizza__actions">
+                <div className={styles.pizza__actions}>
                     <p
-                        className="pizza__price"
+                        className={styles.pizza__price}
                         style={pizza.soldOut ? { display: 'none' } : {}}
                     >
                         €{pizza.unitPrice}.00
                     </p>
 
                     {pizza.soldOut ? (
-                        <p className="pizza__price soldout">Sold out</p>
+                        <p className={styles.pizza__price}>Sold out</p>
                     ) : (
                         <>
                             {!showCounter ? (
                                 <button
-                                    className="button pizza__button"
+                                    className={styles.pizza__button}
                                     onClick={() => handleAddToCart(pizza)}
                                 >
                                     Add to cart
                                 </button>
                             ) : (
-                                <div className="counter">
+                                <div className={styles.counter}>
                                     <button
-                                        className="pizza__button"
+                                        className={styles.pizza__button}
                                         onClick={() =>
                                             handleDecrement(pizza.id)
                                         }
@@ -76,7 +77,7 @@ const PizzaCard = ({ pizza }) => {
                                     </button>
                                     <p>{item[0].qty}</p>
                                     <button
-                                        className="pizza__button"
+                                        className={styles.pizza__button}
                                         onClick={() =>
                                             handleIncrement(pizza.id)
                                         }
@@ -84,7 +85,7 @@ const PizzaCard = ({ pizza }) => {
                                         +
                                     </button>
                                     <button
-                                        className="pizza__button"
+                                        className={styles.pizza__button}
                                         onClick={() => handleDelete(pizza.id)}
                                     >
                                         Delete

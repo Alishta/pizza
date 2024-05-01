@@ -1,5 +1,11 @@
-$background: red;
+$accent-color: rgb(234, 179, 8);
 
 .button {
-    background-color: red;
+    font-family: Roboto Mono, monospace;
+    border: 0;
+    padding: 10px 15px;
+    background-color: $accent-color;
+    font-size: 16px;
+    border-radius: 4px;
+    cursor: pointer;
 }

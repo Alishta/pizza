@@ -1,9 +1,9 @@
-import Form from '../components/Form/Form';
-import Input from '../components/Input/Input';
-import Button from '../components/Button/Button';
+import Form from '../../components/Form/Form';
+import Input from '../../components/Input/Input';
+import Button from '../../components/Button/Button';
 import { useNavigate } from 'react-router-dom';
 import { useContext } from 'react';
-import { AuthContext } from '../contexts/AuthContext';
+import { AuthContext } from '../../contexts/AuthContext';
 
 const Auth = () => {
     const navigate = useNavigate();

@@ -1,0 +1,29 @@
+.cart {
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+.cart__heading {
+    font-size: 36px;
+    font-weight: 600;
+}
+
+.cart__totalitem {
+    font-size: 18px;
+}
+
+.cart__totalprice {
+    font-size: 20px;
+    font-weight: 700;
+}
+.cart__items {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: start;
+    width: 100%;
+    gap: 5%;
+    padding-top: 30px;
+}

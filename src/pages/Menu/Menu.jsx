@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import PizzaCard from '../components/Menu/PizzaCard';
+import PizzaCard from '../../components/Menu/PizzaCard';
+import styles from './Menu.module.scss';
 
 const Menu = (props) => {
     const [pizzas, setPizzas] = useState([]);
@@ -32,7 +33,7 @@ const Menu = (props) => {
         <>
             {error && <p>{error}</p>}
             {isLoading && <h2>Loading...</h2>}
-            <ul className="menu">
+            <ul className={styles.menu}>
                 {!!pizzas.length &&
                     pizzas.map((pizza) => (
                         <PizzaCard key={pizza.id} pizza={pizza} />
